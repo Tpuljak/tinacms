@@ -161,6 +161,7 @@ const RenderForm = ({
       cms.dispatch({ type: 'forms:set-active-form-id', value: null })
     }
   }, [JSON.stringify(document._values)])
+
   if (!cms.state.activeFormId) {
     return null
   }
@@ -174,6 +175,7 @@ const RenderForm = ({
       <div
         className={`pt-3 pb-4 border-b border-gray-200 bg-white w-full grow-0 shrink basis-0 flex justify-center ${headerPadding}`}
       >
+        TEST EDIT
         <div className="w-full max-w-form flex gap-1.5 justify-between items-center">
           <Link
             to={`/collections/${collection.name}/~${parentFolder}`}
