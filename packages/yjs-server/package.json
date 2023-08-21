@@ -1,0 +1,21 @@
+{
+  "name": "yjs-server",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "serve": "ts-node index.ts"
+  },
+  "dependencies": {
+    "ws": "^8.13.0",
+    "y-websocket": "^1.5.0",
+    "yjs": "^13.6.7"
+  },
+  "devDependencies": {
+    "@types/ws": "^7.2.6",
+    "ts-node": "^10.8.2",
+    "tslib": "^2.3.0",
+    "typescript": "^5.1.6"
+  }
+}
