@@ -21,7 +21,7 @@ export const MdxFieldPlugin = {
   name: 'rich-text',
   Component: wrapFieldsWithMeta<InputProps, { templates: MdxTemplate[] }>(
     (props) => {
-      const [rawMode, setRawMode] = React.useState(false)
+      const [rawMode, setRawMode] = React.useState(true)
       const [key, setKey] = React.useState(0)
 
       /**

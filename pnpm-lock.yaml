@@ -212,7 +212,7 @@ importers:
         version: 4.8.4
       vite:
         specifier: ^4.3.9
-        version: 4.3.9(@types/node@14.18.21)
+        version: 4.3.9(@types/node@14.18.29)
       vitest:
         specifier: ^0.32.2
         version: 0.32.2
@@ -480,6 +480,15 @@ importers:
       typescript:
         specifier: ^4.6.4
         version: 4.7.4
+      y-monaco:
+        specifier: ^0.1.4
+        version: 0.1.4(monaco-editor@0.31.0)(yjs@13.6.7)
+      y-websocket:
+        specifier: ^1.5.0
+        version: 1.5.0(yjs@13.6.7)
+      yjs:
+        specifier: ^13.6.7
+        version: 13.6.7
       zod:
         specifier: ^3.14.3
         version: 3.17.3
@@ -745,7 +754,7 @@ importers:
         version: 1.0.3
       vite:
         specifier: ^4.3.9
-        version: 4.3.9(@types/node@14.18.21)
+        version: 4.3.9(@types/node@14.18.29)
       yarn:
         specifier: ^1.22.17
         version: 1.22.19
@@ -1291,7 +1300,7 @@ importers:
         version: 4.7.4
       vite:
         specifier: ^4.3.9
-        version: 4.3.9(@types/node@14.18.21)
+        version: 4.3.9(@types/node@14.18.29)
       yargs:
         specifier: ^17.0.1
         version: 17.5.1
@@ -1711,6 +1720,9 @@ importers:
       webfontloader:
         specifier: 1.6.28
         version: 1.6.28
+      y-monaco:
+        specifier: ^0.1.4
+        version: 0.1.4(monaco-editor@0.31.0)(yjs@13.6.7)
       y-websocket:
         specifier: ^1.5.0
         version: 1.5.0(yjs@13.6.7)
@@ -1854,12 +1866,6 @@ importers:
       typescript:
         specifier: ^5.1.6
         version: 5.1.6
-      vite:
-        specifier: ^4.3.9
-        version: 4.3.9(@types/node@14.18.29)
-      vitest:
-        specifier: ^0.32.2
-        version: 0.32.2
 
 packages:
   /@adobe/css-tools@4.2.0:
@@ -14624,7 +14630,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.5)
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.3.9(@types/node@14.18.21)
+      vite: 4.3.9(@types/node@14.18.29)
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -30834,6 +30840,7 @@ packages:
       rollup: 3.25.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
 
   /vite@4.3.9(@types/node@14.18.29):
     resolution:
@@ -30869,7 +30876,6 @@ packages:
       rollup: 3.25.1
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /vite@4.3.9(@types/node@18.7.18):
     resolution:
@@ -31427,6 +31433,20 @@ packages:
       yjs: 13.6.7
     dev: false
     optional: true
+
+  /y-monaco@0.1.4(monaco-editor@0.31.0)(yjs@13.6.7):
+    resolution:
+      {
+        integrity: sha512-RzAvjKJ2yt3VjlKK55U8STJyd1gz5/Qm6pjt7SAVb+k+g+KaSeTuSBGt+lURN+dzzSNs73ZkIAerW3JM0mzBSw==,
+      }
+    peerDependencies:
+      monaco-editor: '>=0.20.0'
+      yjs: ^13.3.1
+    dependencies:
+      lib0: 0.2.82
+      monaco-editor: 0.31.0
+      yjs: 13.6.7
+    dev: false
 
   /y-protocols@1.0.5:
     resolution:

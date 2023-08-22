@@ -15,7 +15,7 @@ import staticMedia from 'STATIC_MEDIA_IMPORT'
 const RawEditor = React.lazy(() => import('./fields/rich-text'))
 
 const Editor = (props) => {
-  const [rawMode, setRawMode] = React.useState(false)
+  const [rawMode, setRawMode] = React.useState(true)
   return (
     <MdxFieldPluginExtendible.Component
       rawMode={rawMode}
