@@ -1,8 +1,6 @@
 import * as Y from 'yjs'
 import { WebsocketProvider } from 'y-websocket'
 import React, { useMemo } from 'react'
-import { MonacoBinding } from 'y-monaco'
-import * as monaco from 'monaco-editor'
 
 type Props = {
   children: React.ReactNode
@@ -15,6 +13,11 @@ export type UserColor = {
     B: number
   }
   fontColor: string
+}
+
+export type UserData = {
+  username: string
+  color: UserColor
 }
 
 type CursorState = {
@@ -83,20 +86,6 @@ export function YjsProvider(props: Props) {
     })
   }
 
-  const handleChatChanged = (event: Y.YArrayEvent<string>) => {
-    for (const item of event.changes.delta) {
-      if (item.insert !== undefined) {
-        if (item.insert instanceof Array) {
-          item.insert.forEach((message) => {
-            console.log(message)
-          })
-        } else {
-          console.log(item.insert)
-        }
-      }
-    }
-  }
-
   React.useEffect(() => {
     provider.connect()
     provider.awareness.setLocalStateField(
@@ -118,8 +107,6 @@ export function YjsProvider(props: Props) {
     }
 
     window.document.addEventListener('mousemove', handleCursorMove)
-
-    yChat.observe(handleChatChanged)
 
     return () => {
       provider.awareness.destroy()

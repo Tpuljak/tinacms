@@ -211,20 +211,20 @@ export const TinaAdmin = ({
   }
 
   return (
-    <GetCMS>
-      {(cms: TinaCMS) => {
-        const isTinaAdminEnabled =
-          cms.flags.get('tina-admin') === false ? false : true
-        if (isTinaAdminEnabled) {
-          const tinaClient: Client = cms.api?.tina
-          const collectionWithRouter =
-            tinaClient?.schema?.config?.collections.find((x) => {
-              return typeof x?.ui?.router === 'function'
-            })
-          const hasRouter = Boolean(collectionWithRouter)
-          return (
-            <>
-              <YjsProvider>
+    <YjsProvider>
+      <GetCMS>
+        {(cms: TinaCMS) => {
+          const isTinaAdminEnabled =
+            cms.flags.get('tina-admin') === false ? false : true
+          if (isTinaAdminEnabled) {
+            const tinaClient: Client = cms.api?.tina
+            const collectionWithRouter =
+              tinaClient?.schema?.config?.collections.find((x) => {
+                return typeof x?.ui?.router === 'function'
+              })
+            const hasRouter = Boolean(collectionWithRouter)
+            return (
+              <>
                 <CheckSchema schemaJson={schemaJson}>
                   <Router>
                     {/* @ts-ignore */}
@@ -349,23 +349,23 @@ export const TinaAdmin = ({
                     </Routes>
                   </Router>
                 </CheckSchema>
-              </YjsProvider>
-            </>
-          )
-        } else {
-          return (
-            <Layout>
-              <Router>
-                <Routes>
-                  <Route path="logout" element={<LogoutPage />} />
-                  <Route path="/" element={<Redirect />} />
-                </Routes>
-              </Router>
-            </Layout>
-          )
-        }
-      }}
-    </GetCMS>
+              </>
+            )
+          } else {
+            return (
+              <Layout>
+                <Router>
+                  <Routes>
+                    <Route path="logout" element={<LogoutPage />} />
+                    <Route path="/" element={<Redirect />} />
+                  </Routes>
+                </Router>
+              </Layout>
+            )
+          }
+        }}
+      </GetCMS>
+    </YjsProvider>
   )
 }
 
