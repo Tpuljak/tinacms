@@ -12,7 +12,7 @@ import type { TinaCMS } from '@tinacms/toolkit'
 import { useWindowWidth } from '@react-hook/window-size'
 import { useCollectionFolder } from './utils'
 import { ErrorDialog } from '../components/ErrorDialog'
-// import { useYjsUsers } from '../../hooks/use-yjs-users'
+import { useYjsUsers } from '../../hooks/use-yjs-users'
 
 const updateDocument = async (
   cms: TinaCMS,
@@ -189,7 +189,7 @@ const RenderForm = ({
           <span className="flex-1 w-full text-sm leading-tight whitespace-nowrap truncate">
             {`${filename}.${collection.format}`}
           </span>
-          {/* <UserAvatars /> */}
+          <UserAvatars />
           <FormStatus pristine={formIsPristine} />
         </div>
       </div>
@@ -200,6 +200,6 @@ const RenderForm = ({
   )
 }
 
-// CITYJS: Avatars component
+// CITYJS: UserAvatars component
 
 export default CollectionUpdatePage

@@ -176,7 +176,14 @@ export const TinaCloudProvider = (
     [props.cms]
   )
   if (!cms.api.tina) {
-    cms.registerApi('tina', createClient({ ...props, branch: currentBranch }))
+    cms.registerApi(
+      'tina',
+      createClient({
+        ...props,
+        branch: currentBranch,
+        apiUrl: 'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
+      })
+    )
   } else {
     cms.api.tina.setBranch(currentBranch)
   }

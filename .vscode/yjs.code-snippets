@@ -373,6 +373,8 @@
       "            padding: '7px',",
       "            backgroundColor: 'white',",
       "            marginLeft: '-7px',",
+      "            width: '42px',",
+      "            textAlign: 'center',",
       "          }}",
       "        >",
       "          +{Array.from(users.entries()).length - 4}",

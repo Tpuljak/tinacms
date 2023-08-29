@@ -811,7 +811,8 @@ mutation addPendingDocumentMutation(
   }
 }
 
-export const DEFAULT_LOCAL_TINA_GQL_SERVER_URL = 'http://localhost:4001/graphql'
+export const DEFAULT_LOCAL_TINA_GQL_SERVER_URL =
+  'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql'
 
 const LOCAL_CLIENT_KEY = 'tina.local.isLogedIn'
 
@@ -941,7 +942,9 @@ export class LocalSearchClient implements SearchClient {
     const opt = optionsToSearchIndexOptions(options)
     const optionsParam = opt['PAGE'] ? `&options=${JSON.stringify(opt)}` : ''
     const res = await this.client.fetchWithToken(
-      `http://localhost:4001/searchIndex?q=${JSON.stringify(q)}${optionsParam}`
+      `https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/searchIndex?q=${JSON.stringify(
+        q
+      )}${optionsParam}`
     )
     return parseSearchIndexResponse(await res.json(), options)
   }

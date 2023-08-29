@@ -31,7 +31,7 @@ describe('Tina side bar', () => {
   afterEach(() => {
     cy.request({
       method: 'POST',
-      url: 'http://localhost:4001/graphql',
+      url: 'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
       body: {
         query: `mutation {
           updateDocument(
@@ -52,7 +52,7 @@ describe('Tina side bar', () => {
     // reset content from GraphQL API
     cy.request({
       method: 'POST',
-      url: 'http://localhost:4001/graphql',
+      url: 'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
       body: {
         query: `mutation {
           updateDocument(collection: "page" relativePath: "home.mdx"  params: {page: {heading: "" subtitle: ""}}){
@@ -62,7 +62,7 @@ describe('Tina side bar', () => {
       },
     })
 
-    // cy.intercept('http://localhost:4001/graphql').as('graphQL')
+    // cy.intercept('https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql').as('graphQL')
     // cy.intercept('/_next/**').as('next')
     cy.visit('/admin/index.html#/~')
 
