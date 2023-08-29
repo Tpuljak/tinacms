@@ -12,7 +12,7 @@ import type { TinaCMS } from '@tinacms/toolkit'
 import { useWindowWidth } from '@react-hook/window-size'
 import { useCollectionFolder } from './utils'
 import { ErrorDialog } from '../components/ErrorDialog'
-import { UseYjsUsers } from '../../hooks/use-yjs-users'
+// import { useYjsUsers } from '../../hooks/use-yjs-users'
 
 const updateDocument = async (
   cms: TinaCMS,
@@ -189,7 +189,7 @@ const RenderForm = ({
           <span className="flex-1 w-full text-sm leading-tight whitespace-nowrap truncate">
             {`${filename}.${collection.format}`}
           </span>
-          <UserAvatars />
+          {/* <UserAvatars /> */}
           <FormStatus pristine={formIsPristine} />
         </div>
       </div>
@@ -200,41 +200,6 @@ const RenderForm = ({
   )
 }
 
-function UserAvatars() {
-  const users = UseYjsUsers()
-  return (
-    <div className="flex">
-      {Array.from(users.entries())
-        .slice(0, 4)
-        .map((user, i) => (
-          <div
-            key={user[0]}
-            style={{
-              border: `2px solid rgb(${user[1].color.backgroundColor.R}, ${user[1].color.backgroundColor.G}, ${user[1].color.backgroundColor.B})`,
-              borderRadius: '100%',
-              padding: '7px',
-              backgroundColor: 'white',
-              marginLeft: i > 0 ? '-7px' : '0',
-            }}
-          >
-            {user[1].username.slice(0, 1).toUpperCase()}
-          </div>
-        ))}
-      {Array.from(users.entries()).length > 4 && (
-        <div
-          style={{
-            border: '2px solid #ccc',
-            borderRadius: '100%',
-            padding: '7px',
-            backgroundColor: 'white',
-            marginLeft: '-7px',
-          }}
-        >
-          +{Array.from(users.entries()).length - 4}
-        </div>
-      )}
-    </div>
-  )
-}
+// CITYJS: Avatars component
 
 export default CollectionUpdatePage

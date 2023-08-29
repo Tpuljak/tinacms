@@ -92,6 +92,7 @@ export function YjsProvider(props: Props) {
       'user',
       JSON.stringify({ username, color })
     )
+    // Subscribe to awareness updates
     provider.awareness.on('update', handleAwarenessUpdate)
 
     // @ts-ignore
@@ -111,6 +112,7 @@ export function YjsProvider(props: Props) {
     return () => {
       provider.awareness.destroy()
       provider.disconnect()
+      // Remove event listeners from awareness and window
       window.document.removeEventListener('mousemove', handleCursorMove)
       provider.awareness.off('update', handleAwarenessUpdate)
     }

@@ -21,8 +21,6 @@ import {
   InvalidMarkdownElement,
 } from './error-message'
 import { RichTextType } from 'tinacms'
-import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket'
 import { MonacoBinding } from 'y-monaco'
 
 export const uuid = () => {
@@ -160,82 +158,7 @@ export const RawEditor = (props: RichTextType) => {
       monacoEditor.layout()
     })
 
-    // @ts-ignore
-    const provider = window.provider
-    // @ts-ignore
-    const type = window.yDoc.getText('monaco')
-
-    // Bind Yjs to the editor model
-    const monacoBinding = new MonacoBinding(
-      type,
-      monacoEditor.getModel()!,
-      new Set([monacoEditor]),
-      provider.awareness
-    )
-    provider.connect()
-
-    function getRandomColor() {
-      const color = {
-        R: Math.floor(((1 + Math.random()) * 256) / 2),
-        G: Math.floor(((1 + Math.random()) * 256) / 2),
-        B: Math.floor(((1 + Math.random()) * 256) / 2),
-      }
-
-      const luminance =
-        (0.299 * color.R + 0.587 * color.G + 0.114 * color.B) / 255
-
-      return {
-        backgroundColor: color,
-        fontColor: luminance > 0.5 ? 'black' : 'white',
-      }
-    }
-
-    const insertDecorationRules = (user, clientID) => {
-      const backgroundColorCss = `${user.color.backgroundColor.R}, ${user.color.backgroundColor.G}, ${user.color.backgroundColor.B}`
-      document.styleSheets[0].insertRule(
-        `.yRemoteSelection-${clientID} { background-color: rgba(${backgroundColorCss}, 0.5); }`,
-        0
-      )
-      document.styleSheets[0].insertRule(
-        `.yRemoteSelectionHead-${clientID} {
-        border-left: rgb(${backgroundColorCss}) solid 2px;
-        border-top: rgb(${backgroundColorCss}) solid 2px;
-        border-bottom: rgb(${backgroundColorCss}) solid 2px; 
-      }`,
-        0
-      )
-      document.styleSheets[0].insertRule(
-        `.yRemoteSelectionHead-${clientID}::after {
-        background-color: rgba(${backgroundColorCss}, 1); 
-        color: ${user.color.fontColor};
-        content: '${user.username}';  
-        position: absolute;
-        top: -1rem;
-        padding: 0 6px;
-        border-radius: 6px;
-      }`
-      )
-    }
-
-    provider.awareness.getStates().forEach((state, clientID) => {
-      if (!state.user) {
-        return
-      }
-
-      const user = JSON.parse(state.user)
-      insertDecorationRules(user, clientID)
-    })
-
-    provider.awareness.on('update', (params: { added: Array<number> }) => {
-      provider.awareness.getStates().forEach((state, clientID) => {
-        if (!state.user || !params.added.includes(clientID)) {
-          return
-        }
-
-        const user = JSON.parse(state.user)
-        insertDecorationRules(user, clientID)
-      })
-    })
+    // CITYJS: Insert yjs binding
   }
 
   return (
