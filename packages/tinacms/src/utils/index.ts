@@ -30,8 +30,7 @@ export const createClient = ({
 }: CreateClientProps) => {
   return isLocalClient
     ? new LocalClient({
-        customContentApiUrl:
-          'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
+        customContentApiUrl: 'http://localhost:4001/graphql',
         schema,
       })
     : new Client({
@@ -41,8 +40,7 @@ export const createClient = ({
         tinaioConfig,
         schema,
         tinaGraphQLVersion,
-        customContentApiUrl:
-          'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
+        customContentApiUrl: 'http://localhost:4001/graphql',
       })
 }
 

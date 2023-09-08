@@ -201,5 +201,43 @@ const RenderForm = ({
 }
 
 // CITYJS: UserAvatars component
+function UserAvatars() {
+  const users = useYjsUsers()
+  return (
+    <div className="flex">
+      {Array.from(users.entries())
+        .slice(0, 4)
+        .map((user, i) => (
+          <div
+            key={user[0]}
+            style={{
+              border: `2px solid rgb(${user[1].color.backgroundColor.R}, ${user[1].color.backgroundColor.G}, ${user[1].color.backgroundColor.B})`,
+              borderRadius: '100%',
+              padding: '7px',
+              backgroundColor: 'white',
+              marginLeft: i > 0 ? '-7px' : '0',
+            }}
+          >
+            {user[1].username.slice(0, 1).toUpperCase()}
+          </div>
+        ))}
+      {Array.from(users.entries()).length > 4 && (
+        <div
+          style={{
+            border: '2px solid #ccc',
+            borderRadius: '100%',
+            padding: '7px',
+            backgroundColor: 'white',
+            marginLeft: '-7px',
+            width: '42px',
+            textAlign: 'center',
+          }}
+        >
+          +{Array.from(users.entries()).length - 4}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default CollectionUpdatePage

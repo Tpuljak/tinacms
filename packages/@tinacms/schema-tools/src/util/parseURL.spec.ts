@@ -4,7 +4,7 @@
 
 import { parseURL, TINA_HOST } from './parseURL'
 const MOCK_HOST_PROD = `https://${TINA_HOST}`
-const MOCK_HOST_LOCAL = `https://localhost:4001`
+const MOCK_HOST_LOCAL = `http://localhost:4001`
 const MOCK_CLIENT_ID = '1234'
 const MOCK_VERSION = 'beta'
 const MOCK_BRANCH = 'main'

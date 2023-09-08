@@ -10,8 +10,8 @@ import type { ScreenPlugin } from '@toolkit/react-screens'
 import { SyncStatus, SyncErrorWidget, SyncStatusModal } from './sync-status'
 import { useCMS } from '@toolkit/react-core'
 import { CloudConfigPlugin } from '@toolkit/react-cloud-config'
-// import { useYjsChat } from '../../../hooks/use-yjs-chat'
-// import { useYjs } from '../../../hooks/use-yjs'
+import { useYjsChat } from '../../../hooks/use-yjs-chat'
+import { useYjs } from '../../../hooks/use-yjs'
 
 interface NavProps {
   isLocalMode: boolean
@@ -209,13 +209,119 @@ export const Nav = ({
         }}
       >
         {/* CITYJS: Chat window here */}
+        <ChatWindow />
       </div>
     </div>
   )
 }
 
 // CITYJS: ChatWindow component
+const ChatWindow = () => {
+  const { messages, sendMessage, clearMessages } = useYjsChat()
+  const { provider } = useYjs()
+  const [message, setMessage] = React.useState('')
 
+  React.useEffect(() => {
+    document
+      .querySelector('.dummy-scroll')
+      ?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  return (
+    <div
+      style={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <h3>Chat window</h3>
+      <div>
+        <div
+          style={{
+            maxHeight: '350px',
+            overflowY: 'scroll',
+          }}
+        >
+          {messages.map((message, i) => {
+            const color = `rgb(${message.userData.color.backgroundColor.R}, ${message.userData.color.backgroundColor.G}, ${message.userData.color.backgroundColor.B})`
+            return (
+              <div
+                key={i}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent:
+                    message.clientID === provider.awareness.clientID
+                      ? 'flex-end'
+                      : 'flex-start',
+                  margin: '5px 0',
+                }}
+              >
+                <div
+                  style={{
+                    border: `2px solid ${color}`,
+                    borderRadius: '10px',
+                    padding: '4px 15px',
+                    textAlign:
+                      message.clientID === provider.awareness.clientID
+                        ? 'right'
+                        : 'left',
+                  }}
+                >
+                  {message.message}
+                </div>
+              </div>
+            )
+          })}
+          <div className="dummy-scroll"></div>
+        </div>
+        <div
+          style={{
+            width: '100%',
+          }}
+        >
+          <input
+            type="text"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                if (message === 'clear') {
+                  clearMessages()
+                } else {
+                  sendMessage(message)
+                }
+                setMessage('')
+              }
+            }}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            style={{
+              width: '70%',
+              border: '1px solid blue',
+              borderRadius: '10px',
+              padding: '0 10px',
+            }}
+          />
+          <button
+            style={{
+              width: '25%',
+              marginLeft: '5px',
+              border: '1px solid red',
+              borderRadius: '10px',
+            }}
+            onClick={() => {
+              sendMessage(message)
+              setMessage('')
+            }}
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
 const CollectionsList = ({
   collections,
   RenderNavCollection,

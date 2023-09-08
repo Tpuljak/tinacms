@@ -159,6 +159,67 @@ export const RawEditor = (props: RichTextType) => {
     })
 
     // CITYJS: Insert yjs binding
+    // @ts-ignore
+    const provider = window.provider
+    // @ts-ignore
+    const type = window.yDoc.getText('monaco')
+
+    // Bind Yjs to the editor model
+    const monacoBinding = new MonacoBinding(
+      type,
+      monacoEditor.getModel()!,
+      new Set([monacoEditor]),
+      provider.awareness
+    )
+    provider.connect()
+
+    // CITYJS: Decoration rules
+    const insertDecorationRules = (user, clientID) => {
+      const backgroundColorCss = `${user.color.backgroundColor.R}, ${user.color.backgroundColor.G}, ${user.color.backgroundColor.B}`
+      document.styleSheets[0].insertRule(
+        `.yRemoteSelection-${clientID} { background-color: rgba(${backgroundColorCss}, 0.5); }`,
+        0
+      )
+      document.styleSheets[0].insertRule(
+        `.yRemoteSelectionHead-${clientID} {
+            border-left: rgb(${backgroundColorCss}) solid 2px;
+            border-top: rgb(${backgroundColorCss}) solid 2px;
+            border-bottom: rgb(${backgroundColorCss}) solid 2px; 
+          }`,
+        0
+      )
+      document.styleSheets[0].insertRule(
+        `.yRemoteSelectionHead-${clientID}::after {
+            background-color: rgba(${backgroundColorCss}, 1); 
+            color: ${user.color.fontColor};
+            content: '${user.username}';  
+            position: absolute;
+            top: -1rem;
+            padding: 0 6px;
+            border-radius: 6px;
+          }`
+      )
+    }
+
+    provider.awareness.getStates().forEach((state, clientID) => {
+      if (!state.user) {
+        return
+      }
+
+      const user = JSON.parse(state.user)
+      insertDecorationRules(user, clientID)
+    })
+
+    provider.awareness.on('update', (params: { added: Array<number> }) => {
+      provider.awareness.getStates().forEach((state, clientID) => {
+        if (!state.user || !params.added.includes(clientID)) {
+          return
+        }
+
+        const user = JSON.parse(state.user)
+        insertDecorationRules(user, clientID)
+      })
+    })
   }
 
   return (

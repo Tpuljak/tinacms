@@ -181,7 +181,7 @@ export const TinaCloudProvider = (
       createClient({
         ...props,
         branch: currentBranch,
-        apiUrl: 'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
+        apiUrl: 'http://localhost:4001/graphql',
       })
     )
   } else {

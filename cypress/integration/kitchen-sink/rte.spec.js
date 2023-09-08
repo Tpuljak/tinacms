@@ -11,7 +11,7 @@ describe('Rich Text Editor', () => {
   beforeEach(() => {
     cy.request({
       method: 'POST',
-      url: 'https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql',
+      url: 'http://localhost:4001/graphql',
       body: {
         query: `mutation {
           updateDocument(

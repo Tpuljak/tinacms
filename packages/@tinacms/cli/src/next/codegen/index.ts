@@ -183,11 +183,11 @@ export class Codegen {
         )}. Please visit https://tina.io/docs/tina-cloud/connecting-site/ for more information`
       )
     }
-    let localUrl = `https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql`
+    let localUrl = `http://localhost:4001/graphql`
     let tinaCloudUrl = `${baseUrl}/${version}/content/${clientId}/github/${branch}`
 
     let apiURL = this.isLocal
-      ? `https://4001-tpuljak-tinacms-o8gyi9iqam.daytona.io/graphql`
+      ? `http://localhost:4001/graphql`
       : `${baseUrl}/${version}/content/${clientId}/github/${branch}`
 
     if (this.configManager.config.contentApiUrlOverride) {
